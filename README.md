@@ -5,8 +5,8 @@
 </p>
 
 <div align="center">
-  <img src="gameplay2.gif" width="45%" />
-  <img src="gameplay1.gif" width="45%" />
+  <img src="Assets/gameplay2.gif" width="45%" />
+  <img src="Assets/gameplay1.gif" width="45%" />
 </div>
 
 
