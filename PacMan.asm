@@ -71,7 +71,7 @@ GreenSafetyFirst	db	0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;PublicStufe
 time1		db	0
 time2		db	0
-delay		dw	230
+delay		dw	1
 points		dw	0
 finalscore	dw	0
 TestDelay	dw	0
@@ -98,160 +98,6 @@ assume	cs:cseg, ds:dseg
 				
 		mov ax, 13h
 		int 10h
-		
-		mov dx, offset level3
-		mov ah, 9
-		int 21h
-		
-		mov ah, 2
-		mov bh, 0
-		mov dl, 0
-		mov dh, 0
-		int 10h
-				
-TestDrawPM:
-		mov si, 0
-		mov al, 0
-		mov ah, 0ch
-		mov di, topLeftY
-		mov courntY, di
-Again6:	mov di, topLeftX
-		mov courntX, di
-Again5:	mov bl, PacManC[si]
-		cmp bl, 255
-		jnc EndOfRow1
-		cmp bl, 254
-		jnc EndOfPM1
-Again4:	mov dx, courntY	;row
-		mov cx, courntX	;col
-		mov bh, 9
-		int 10h
-		inc courntX
-		dec bl
-		jnz Again4
-		cmp al, 14
-		jz Put1
-		mov al, 14
-		jmp NextPixal1
-Put1:	mov al, 0
-NextPixal1:	
-		inc si
-		jmp Again5
-EndOfRow1:mov al, 0
-		inc si
-		inc courntY
-		jmp Again6
-EndOfPM1:
-		jmp jj
-ll:		
-		mov ah, 0
-		int 16h
-		mov TestDelay, ax
-		cmp ax, 011Bh
-	    jnz NoQ2
-		jmp DrawWorld
-NoQ2:	cmp ax, 4800h
-		jnz	NoOTest
-		cmp delay, 50
-		jz	NoOTest
-		sub delay, 30
-		inc level
-		jmp jj
-NoOTest:cmp ax, 5000h
-		jnz jj
-		cmp delay, 320
-		jz	jj
-		add delay, 30
-		dec level
-jj:		cmp level, 1
-		jnz NLV1
-		mov dx, offset level1
-		mov ah, 9
-		int 21h
-NLV1:	cmp level, 2
-		jnz NLV2
-		mov dx, offset level2
-		mov ah, 9
-		int 21h
-NLV2:	cmp level, 3
-		jnz NLV3
-		mov dx, offset level3
-		mov ah, 9
-		int 21h
-NLV3:	cmp level, 4
-		jnz NLV4
-		mov dx, offset level4
-		mov ah, 9
-		int 21h
-NLV4:	cmp level, 5
-		jnz NLV5
-		mov dx, offset level5
-		mov ah, 9
-		int 21h
-NLV5:	cmp level, 6
-		jnz NLV6
-		mov dx, offset level6
-		mov ah, 9
-		int 21h
-NLV6:	cmp level, 7
-		jnz NLV7
-		mov dx, offset level7
-		mov ah, 9
-		int 21h
-NLV7:	cmp level, 8
-		jnz NLV8
-		mov dx, offset level8
-		mov ah, 9
-		int 21h
-NLV8:	cmp level, 9
-		jnz NLV9
-		mov dx, offset level9
-		mov ah, 9
-		int 21h
-NLV9:	cmp level, 10
-		jnz NLV10
-		mov dx, offset level10
-		mov ah, 9
-		int 21h
-NLV10:	mov ah, 2
-		mov bh, 0
-		mov dl, 0
-		mov dh, 0
-		int 10h
-		mov ax, Delay		
-hhhh3:	mov cx, 7fffh
-hhhh2:	loop hhhh2
-		dec Delay
-		cmp Delay, 0
-		jnz hhhh3
-		mov Delay, ax
-		mov ah, 1h
-		int 16h
-		jz nll
-		jmp ll
-nll:	mov ax, CorrentD
-		cmp ax, 4b00h
-	    jnz NoTestA1
-	    jmp TestA
-NoTestA1:jmp TestD				
-		
-TestA:	dec topLeftX
-		dec ButRigthX
-		dec topRigthX
-		dec ButLeftX
-		cmp topLeftX, 20
-		jnz nop1
-		mov CorrentD, 4d00h
-nop1:	jmp TestDrawPM
-
-TestD:	inc topLeftX
-		inc ButRigthX
-		inc topRigthX
-		inc ButLeftX
-		cmp topRigthX, 320
-		jnz nop2
-		mov CorrentD, 4b00h
-nop2:	jmp TestDrawPM
 		
 DrawWorld:	
 		mov topLeftX,155
@@ -986,9 +832,9 @@ FixW2:	inc topLeftY
 		jmp ContinuMove
 
 PacManLoser:
-		mov cx, 09fffh
+		mov cx, 005ffh
 ghgh1:	push cx
-		mov cx, 0f9ffh
+		mov cx, 0000fh
 hghg1:	loop hghg1
 		pop	cx
 		loop ghgh1
