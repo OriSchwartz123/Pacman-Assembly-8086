@@ -52,4 +52,4 @@ To play the game on a modern machine, you will need a DOS emulator.
     ```
 
 ---
-*Created by Ori Schwartz as a final high-school project in Computer Science (Assembly 8086).*
+*Created by Ori Schwartz*
